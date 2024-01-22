@@ -134,7 +134,7 @@
     opacity: 1;
 }
 
-
+/*  */
 /* Main Content  */
 .main-content {
     position: relative;
@@ -147,8 +147,236 @@
     padding: 1rem;
 }
 
-
 .main-container {
     display: flex;
     justify-content: space-between;
+    width: 80%;
+    margin: 0 0 20px 180px;
 }
+
+
+/* Button Style */
+.btn-style1 {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 17px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.btn-style1:hover{
+    background-color:#025033c5 ;
+    transition: 0.2s;
+}
+
+
+.btn-primary {
+    background-color: #3639e3; /* Blue */
+    color: white;
+    border: none;
+    padding: 15px 17px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+
+.btn-secondary {
+    background-color: #787a7d; /* Grey */
+    color: #eee;
+    border: none;
+    padding: 15px 17px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.btn-error {
+    background-color: #cc3300 ; /* Red*/
+    color: #eee;
+    border: none;
+    padding: 15px 17px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+
+.getCenter{
+    justify-content: center;
+    align-items: center;
+}
+
+/* Need to do modal , don't copy paste , build and learn */
+
+.modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  border-radius: 10px;
+  left: 0;  /* prevent user click on any */
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 2px solid #888;
+  width: 50%; 
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header-success {
+  padding: 12px 16px;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.modal-header-warning {
+    padding: 12px 16px;
+    background-color: #ffcc00d2;
+    color: black;
+}
+
+.modal-body {
+    padding: 16px;
+    margin: 0 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.modal-body > div > span {
+    font-size: 160%;
+    font-weight: bold;
+}   
+
+.modal-footer {
+  padding: 12px 16px;
+  background-color: #efefef;
+  color: white;
+  display: flex;
+  justify-content: end;
+}
+
+/* Input Text styiling */
+.modal-body > div > #txt_task_desc, #txt_task_title  {
+    width: 100%; 
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 12px 20px;
+    font-size: 20px;
+}
+
+.modal-body > div > #txt_task_desc {
+    border: 2px solid #000;  
+    height: 200px; 
+    resize: none;  /* Prevent user resizing the box */
+}
+
+.modal-body > div > #txt_task_desc:focus,
+.modal-body > div > #txt_task_title:focus {
+    /* Styles for focused state */
+    border: 3px solid #555;  
+    box-shadow: 0 0 5px #555; /* Example: Add a box shadow on focus */
+}
+
+.modal-icon {
+    height: 100px;
+    width: auto;
+}
+
+.modal-body-warn {
+    padding: 16px;
+    margin: 0 10%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/* Table Button Design*/
+.btn-edit {
+    padding: 8px 10px;
+    border: 2px solid #3639e3;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #3639e3;
+    /* background-color: #4144ff; */
+}
+    .btn-edit > i {
+        color: #3639e3;
+        font-size: 20px;
+    }
+
+    .btn-edit:hover,
+    .btn-edit > i:hover {
+        background-color: #ffffffa2;
+    }
+
+
+.btn-remove {
+    padding: 8px 10px;
+    border: 2px solid #ff3333;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #ff3333;
+    /* background-color: #4144ff; */
+}
+    .btn-remove > i {
+        color: #ff3333;
+        font-size: 20px;
+    }
+    
+    .btn-remove:hover,
+    .btn-remove > i:hover {
+        background-color: #ffffffa2;
+    }

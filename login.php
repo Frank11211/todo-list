@@ -1,6 +1,3 @@
-<?php 
-    include "src/database/db.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,17 +14,16 @@
 
 </head>
 <body>
-    <!-- Container -->
+    <!-- Login Container -->
     <div class="login_cont shadow-lg p-3 mb-5 rounded"> 
 
-        <!-- Logo -->
         <img src="img/todoLogo.png" alt="testing" >
 
         <div class="input-icons">
             <!-- Tittle -->
-            <h2  class="login_input_mdl">MyWare - TO DO LIST</h2> <!-- Title -->
+            <h2  class="login_input_mdl">MyWare - TO DO LIST</h2>
             
-            <!-- submit to loginValidate -->
+            <!-- submit form to loginValidate.php -->
             <form action="src/view/back-end/loginValidate.php" method="post">
 
                 <!-- Username -->
