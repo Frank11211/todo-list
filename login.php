@@ -29,19 +29,19 @@
                 <!-- Username -->
                 <div class="login_input_mdl">
                     <i class="fa-solid fa-user icon"></i>
-                    <input type="text" class="form-control input-field" placeholder="Username" aria-label="Username" id="login_username">
+                    <input type="text" class="form-control input-field" placeholder="Username" aria-label="Username" name="login_username">
                 </div>
                 
                 <!-- Passwod  -->
                 <div  class="login_input_mdl">
                     <i class="fa-solid fa-key icon"></i>
-                    <input type="password" class="form-control input-field" placeholder="Password" aria-label="Username" id="login_password">
+                    <input type="password" class="form-control input-field" placeholder="Password" aria-label="Username" name="login_password">
                 </div>
                 
                 <!-- Button Group -->
                 <div  class=" get_space">
                     <button type="button" class="btn btn-link"><a href="#"> Forget Password ?</a></button>
-                    <button type="button" class="btn btn-primary" id="login_submit">login</button>
+                    <button type="submit" class="btn btn-primary" name="submit">login</button>
                 </div>
 
             </form>

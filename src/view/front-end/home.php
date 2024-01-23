@@ -1,3 +1,12 @@
+<?php
+    // Start the session
+    session_start();
+
+    $id   = $_SESSION["userId"] ;
+    $name = $_SESSION["userName"]; 
+    $pass = $_SESSION["userPass"] ;
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +32,11 @@
     <!-- Font Awsome CDN -->
     <script src="https://kit.fontawesome.com/5151fc54ff.js" crossorigin="anonymous"></script>
 
+    <!-- Select CDN  -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css">
+
+
 </head>
 <body>
     
@@ -41,7 +55,7 @@
         <div class="user">  
             <img src="../../../img/todoLogo.png" alt="profile picture" class="user-img">
             <div>
-                <p class="bold">Frank Lee</p>
+                <p class="bold"><?php echo $name ?></p>
             </div>
         </div>
         
@@ -69,7 +83,8 @@
             <li>
                 <a href="#">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <span class="nav-item">Logout</span>
+                    <span class="nav-item" id="btn-logout">Logout</span>
+                    
                 </a>
             </li>
         </ul>
@@ -95,6 +110,7 @@
                             <th>Task Name</th>
                             <th>Created Date</th>
                             <th>Status</th>
+                            <th></th>
                             <th></th> 
                             <th></th>  
                         </tr>
@@ -111,6 +127,7 @@
         
             <!-- Modal Content -->
             <div id="add-task-modal" class="modal-content">
+
                 <div class="modal-header-success">
                     <span class="close" id="close-new-icon">&times;</span>
                     <h2>New Task</h2>
@@ -118,6 +135,7 @@
 
                 <!-- Form create task-->
                 <div class="modal-body">
+
                     <!-- title -->
                     <div>
                         <span> Title :</span><br>
@@ -129,11 +147,22 @@
                         <span> Description :</span><br>
                         <textarea id="txt_task_desc"></textarea>
                     </div>
+
+                    <!-- status -->
+                    <div>
+                        <span> Status :</span><br>
+                        <select name="task_status_group" id="opt_task_status">
+                            <option value="OPEN">Open</option>
+                            <option value="IN PROGRESS">In Progress</option>
+                            <option value="COMPLETED">Completed</option>
+                        </select>
+                    </div>
+
                 </div>
                 
                 <div class="modal-footer">
                     <!-- Create Button -->
-                    <button class="btn-primary" onclick='createNewTask();'> CREATE </button>
+                    <button class="btn-primary" id='btnCreateTask'> CREATE </button>
                 </div>   
 
             </div>
@@ -191,7 +220,8 @@
 
     // All button
     var btnAddTask = document.getElementById("btnAddTask");
-
+    var btnLogOut = document.getElementById("btn-logout");
+   
     // Close icon
     var closeNewTaskIcon = document.getElementById("close-new-icon");
     var closeDeletTaskIcon = document.getElementById("close-delete-icon");
@@ -215,25 +245,33 @@
         newTaskModule.style.display = "block";
     });
 
+    // Fetch data from logout.php
+    btnLogOut.addEventListener("click", function(){
+        fetch('../back-end/logOut.php', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if(response.ok){
+                window.location = "../../../login.php";
+            }else{
+                console.error('Error:', response.status);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+
     // Display Delete Task module
     function confirmDeleteModal() {
         deleteTaskModule.style.display = "block";
-    }
+    };
 
-    function createNewTask(){
-        /*
-        * 1. perform validation
-        * 2. send data to PHP for saving in DB (Ajax)
-        */
-
-        if(txtTitle == null || txtTitle == ""){
-            console.log("Error : tittle can't be empty empty");
-            return
-        }
-        
-    }
     
-
 </script>
 
 <!-- DataTable -->
@@ -245,7 +283,8 @@
             "Tiger Nixon",
             "System Architect",
             "Edinburgh",
-            "5421",
+            "5421", 
+            "<button class='btn-view'><i class='fa-solid fa-magnifying-glass'></i> View </button>",
             "<button class='btn-edit'><i class='fa-solid fa-pen-to-square'></i> Edit </button>",
             "<button class='btn-remove' onclick='confirmDeleteModal()'><i class='fa-solid fa-trash '></i> Delete </button>"
         ],
@@ -254,20 +293,61 @@
             "Director",
             "Edinburgh",
             "8422",
+            "<button class='btn-view'><i class='fa-solid fa-magnifying-glass'></i> View </button>",
+            "<button class='btn-edit'><i class='fa-solid fa-pen-to-square'></i> Edit </button>",
+            "<button class='btn-remove' onclick='confirmDeleteModal()' ><i class='fa-solid fa-trash '></i> Delete </button>"
+        ],
+        [
+            "Garrett Winters",
+            "Director",
+            "Edinburgh",
+            "8422",
+            "<button class='btn-view'><i class='fa-solid fa-magnifying-glass'></i> View </button>",
             "<button class='btn-edit'><i class='fa-solid fa-pen-to-square'></i> Edit </button>",
             "<button class='btn-remove' onclick='confirmDeleteModal()' ><i class='fa-solid fa-trash '></i> Delete </button>"
         ]
     ]
 
-    let table = new DataTable('#myTable', {
-        data : data,
-        paging : false,
-        info : false,
-        searching : false, // can use for priority
-        ordering : false, // can use for name
-        responsive: true,
-        
+ 
+    // use jquery to perform add table 
+    $(document).ready(function(){
+        var btnCreateTask = document.getElementById("btnCreateTask");
+
+        // Initializa Database
+       var table =  $("#myTable").DataTable({
+            data : data,
+            paging : false,
+            info : false,
+            searching : false, // can use for priority
+            ordering : false, // can use for name
+            responsive: true,
+            select: true, // default single
+            // ajax : { perform ajax
+               
+            // },
+            // columns : {
+                
+            // },
+            rowCallBack: function(row , data){
+                
+            },
+       })
+
+       btnCreateTask.addEventListener("click", function(){
+            table.row.add([
+                "Garrett Winters",
+                "Director",
+                "Edinburgh",
+                "8422",
+                "<button class='btn-view'><i class='fa-solid fa-magnifying-glass'></i> View </button>",
+                "<button class='btn-edit'><i class='fa-solid fa-pen-to-square'></i> Edit </button>",
+                "<button class='btn-remove' onclick='confirmDeleteModal()' ><i class='fa-solid fa-trash '></i> Delete </button>"
+            ]).draw();
+
+        })
+
     });
+
 
 
     
