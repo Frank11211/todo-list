@@ -212,7 +212,7 @@
 }
 
 
-.getCenter{
+.align-center{
     justify-content: center;
     align-items: center;
 }
@@ -309,7 +309,7 @@
 }
 
 /* Input Text styiling */
-.modal-body > div > #txt_task_desc, #txt_task_title  {
+.modal-body > div > #txt-task-desc, #txt-task-title  {
     width: 100%; 
     border-radius: 5px;
     margin: 10px 0;
@@ -317,14 +317,14 @@
     font-size: 20px;
 }
 
-.modal-body > div > #txt_task_desc {
+.modal-body > div > #txt-task-desc {
     border: 2px solid #000;  
     height: 200px; 
     resize: none;  /* Prevent user resizing the box */
 }
 
-.modal-body > div > #txt_task_desc:focus,
-.modal-body > div > #txt_task_title:focus {
+.modal-body > div > #txt-task-desc:focus,
+.modal-body > div > #txt-task-title:focus {
     /* Styles for focused state */
     border: 3px solid #555;  
     box-shadow: 0 0 5px #555; /* Example: Add a box shadow on focus */

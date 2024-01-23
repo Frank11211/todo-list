@@ -93,16 +93,16 @@
     <!-- Main Content -->
     <div class="main-content">
 
-        <div class="getCenter">
+        <div class="align-center">
 
             <div class="main-container">
                 <h1>To Do List</h1>
 
-                <button class="btn-style1" id="btnAddTask"> <i class="fa-solid fa-plus"></i> New Task </button>
+                <button class="btn-style1" id="btn-add-task"> <i class="fa-solid fa-plus"></i> New Task </button>
             </div>
 
             <div>
-                <table id="myTable" class="display" style="width: 80%;">
+                <table id="my-table" class="display" style="width: 80%;">
                 
                     <thead>
                         <tr>
@@ -121,7 +121,7 @@
         </div>
 
 
-        <!-- All Modal -->
+        <!-- Modals -->
         <!-- Create + Edit -->
         <div id="add-modal" class="modal">
         
@@ -139,13 +139,13 @@
                     <!-- title -->
                     <div>
                         <span> Title :</span><br>
-                        <input type="text" id="txt_task_title" >  <!-- style="width: 100%;" -->
+                        <input type="text" id="txt-task-title" >  <!-- style="width: 100%;" -->
                     </div>
 
                     <!-- description -->
                     <div>
                         <span> Description :</span><br>
-                        <textarea id="txt_task_desc"></textarea>
+                        <textarea id="txt-task-desc"></textarea>
                     </div>
 
                     <!-- status -->
@@ -162,7 +162,7 @@
                 
                 <div class="modal-footer">
                     <!-- Create Button -->
-                    <button class="btn-primary" id='btnCreateTask'> CREATE </button>
+                    <button class="btn-primary" id='btn-create-task'> CREATE </button>
                 </div>   
 
             </div>
@@ -211,15 +211,15 @@
     var sidebar = document.querySelector(".sidebar");
 
     // Get text input by ID 
-    var txtTitle = document.getElementById("txt_task_title").value; 
-    var txtDesc = document.getElementById("txt_task_desc").value;
+    var txtTitle = document.getElementById("txt-task-title").value; 
+    var txtDesc = document.getElementById("txt-task-desc").value;
 
     // Moodule
     var newTaskModule = document.getElementById("add-modal");
     var deleteTaskModule = document.getElementById("delete-modal");
 
     // All button
-    var btnAddTask = document.getElementById("btnAddTask");
+    var btnAddTask = document.getElementById("btn-add-task");
     var btnLogOut = document.getElementById("btn-logout");
    
     // Close icon
@@ -247,7 +247,7 @@
 
     // Fetch data from logout.php
     btnLogOut.addEventListener("click", function(){
-        fetch('../back-end/logOut.php', {
+        fetch('../back-end/logout.php', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -264,7 +264,6 @@
             console.error('Error:', error);
         });
     });
-
 
     // Display Delete Task module
     function confirmDeleteModal() {
@@ -311,10 +310,11 @@
  
     // use jquery to perform add table 
     $(document).ready(function(){
-        var btnCreateTask = document.getElementById("btnCreateTask");
+
+        var btnCreateTask = document.getElementById("btn-create-task");
 
         // Initializa Database
-       var table =  $("#myTable").DataTable({
+       var table =  $("#my-table").DataTable({
             data : data,
             paging : false,
             info : false,
