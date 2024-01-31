@@ -14,7 +14,7 @@ body{
     border-radius: 5px;
     padding: 10px;
     width: 50%;
-    height: 350px;
+    height: auto;
     display: flex;
     justify-content: center;
     margin: 160px 0px 0px 400px ;     /* container movement */
@@ -25,11 +25,6 @@ body{
 .login_input_mdl{   
     padding: 10px;
     margin-bottom: 5px;
-}
-
-.get_space{
-    display: flex;
-    justify-content: space-between;
 }
 
 .input-icons i {
@@ -57,3 +52,38 @@ img{
     height: 100%;    
 }
 
+.recover-pass-link{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+    .recover-pass-link > a {
+        font-size: 16px;
+        text-decoration: none;
+        color: inherit;
+        
+    }
+
+.login-footer{
+    display: flex;
+    flex-direction: column;
+}
+
+    .login-footer > button {
+        margin: 10px 10px;
+        font-size: 20px;
+
+    }
+
+    .login-footer > span {
+        display: flex;
+        justify-content: center;
+        margin: 10px 10px;
+        
+    }
+
+    .login-footer > span > a {
+        text-decoration: none;
+    }
+
+    

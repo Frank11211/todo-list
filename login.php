@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="css/login.css">
-     
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
     <!-- BootStrap Link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
@@ -36,12 +39,13 @@
                 <div  class="login_input_mdl">
                     <i class="fa-solid fa-key icon"></i>
                     <input type="password" class="form-control input-field" placeholder="Password" aria-label="Username" name="login_password">
+                    <span class="recover-pass-link" id="pass-rec-link"> <a href="#">Forget Password ?</a></span> 
                 </div>
                 
-                <!-- Button Group -->
-                <div  class=" get_space">
-                    <button type="button" class="btn btn-link"><a href="#"> Forget Password ?</a></button>
-                    <button type="submit" class="btn btn-primary" name="submit">login</button>
+                <!-- Button Group get_space-->
+                <div class="login-footer">
+                    <button type="submit" class="btn btn-primary" name="submit">Login</button>
+                    <span> No account ? <a href="src/view/front-end/signup.php"> Sign Up Now</a></span> 
                 </div>
 
             </form>
@@ -49,5 +53,13 @@
         </div>
     </div>
     
+    <script type="text/javascript">
+        
+        $('#pass-rec-link').on('click', function(){
+            alert("Sorry, current feature under maintenance");
+        })
+
+        
+    </script>
 </body>
 </html>
