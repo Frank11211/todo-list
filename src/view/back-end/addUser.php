@@ -8,7 +8,7 @@ $response = array();
 
 if (!empty($taskObj) && json_last_error() === JSON_ERROR_NONE) {
 
-    $stmt = $conn->prepare("INSERT INTO task (`task_name`, `task_desc`, `task_created_date`, `task_status`, `task_prio`, `user_id`) VALUES (?,?,?,?,?)");
+    $stmt = $conn->prepare("INSERT INTO task (`task_name`, `task_desc`, `task_created_date`, `task_status`, `task_prio`, `user_id`) VALUES (?,?,?,?,?,?)");
 
     if ($stmt) {
         $stmt->bind_param("sssssi", $taskObj['name'], $taskObj['desc'], $taskObj['date'], $taskObj['status'], $taskObj['priority'], $taskObj['user']);
