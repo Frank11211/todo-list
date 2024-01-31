@@ -134,7 +134,6 @@
     opacity: 1;
 }
 
-/*  */
 /* Main Content  */
 .main-content {
     position: relative;
@@ -153,6 +152,30 @@
     width: 80%;
     margin: 0 0 20px 180px;
 }
+
+
+.header-and-search-container{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.search {
+    
+    width: 80%;
+}
+    .search input { 
+        margin: 0;
+        text-indent: 10px;
+        font-size: 40px;
+        padding: 8px;
+        border-radius: 10px;
+        width: 70%;
+        font-family: inherit; /* Use the font-family of the parent */
+        font-size: inherit;   /* Use the font-size of the parent */
+    
+    }
+
 
 
 /* Button Style */
@@ -213,6 +236,7 @@
 
 
 .align-center{
+    position: relative;
     justify-content: center;
     align-items: center;
 }
@@ -249,7 +273,10 @@
   animation-duration: 0.4s
 }
 
+
+
 /* Add Animation */
+/* Open */
 @-webkit-keyframes animatetop {
   from {top:-300px; opacity:0} 
   to {top:0; opacity:1}
@@ -281,11 +308,24 @@
   color: white;
 }
 
+.modal-header-secondary {
+    padding: 12px 16px;
+    background-color: #787a7d;;
+    color: white;
+}
+
 .modal-header-warning {
     padding: 12px 16px;
     background-color: #ffcc00d2;
     color: black;
 }
+
+.modal-header-primary {
+    padding: 12px 16px;
+    background-color: #3639e3;
+    color: white;
+}
+
 
 .modal-body {
     padding: 16px;
@@ -309,7 +349,7 @@
 }
 
 /* Input Text styiling */
-.modal-body > div > #txt-task-desc, #txt-task-title  {
+.modal-body > div > #txt-task-desc, #txt-task-title, #view-task-title, #view-task-desc, #edit-txt-task-title, #edit-txt-task-desc  {
     width: 100%; 
     border-radius: 5px;
     margin: 10px 0;
@@ -317,7 +357,7 @@
     font-size: 20px;
 }
 
-.modal-body > div > #txt-task-desc {
+.modal-body > div > #txt-task-desc, #view-task-desc, #edit-txt-task-desc {
     border: 2px solid #000;  
     height: 200px; 
     resize: none;  /* Prevent user resizing the box */
@@ -431,12 +471,74 @@ select {
   }
 
 
+/* Status Design */
+.completeTask{
+    border: 2px solid #005A00;
+    color: black;
+    background-color:#00E200 ;
+    padding: 10px 0px;
+    margin-right: 20% ;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.pendingTask{
+    border: 2px solid #664618;
+    color: black;
+    background-color: #FFAF3D ;
+    padding: 10px 0px;
+    margin-right: 20% ;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.openTask{
+    border: 2px solid #285766;
+    color: black;
+    background-color: #64D9FF ;
+    padding: 10px 0px;
+    margin-right: 20% ;
+    border-radius: 5px;
+    text-align: center;
+}
 
 
+/* Priority Design */
+
+.lowPrio{
+    border: 2px solid #645600;
+    color: black;
+    background-color: #FAD800 ;
+    padding: 10px 0px;
+    margin-right: 20% ;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.mediumPrio{
+    border: 2px solid #664618;
+    color: black;
+    background-color: #FFAF3D ;
+    padding: 10px 0px;
+    margin-right: 20% ;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.highPrio{
+    border: 2px solid #661102;
+    color: black;
+    background-color: #FF2A04 ;
+    padding: 10px 0px;
+    margin-right: 20% ;
+    border-radius: 5px;
+    text-align: center;
+}
 
 
-
-
-
-
-
+.task-table-wrapper{
+    padding-left: 150px;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
