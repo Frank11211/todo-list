@@ -473,9 +473,9 @@ select {
 
 /* Status Design */
 .completeTask{
-    border: 2px solid #005A00;
+    border: 2px solid #3C3E42;
     color: black;
-    background-color:#00E200 ;
+    background-color:#b1b8c7 ;
     padding: 10px 0px;
     margin-right: 20% ;
     border-radius: 5px;
