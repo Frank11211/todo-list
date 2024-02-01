@@ -484,7 +484,7 @@
     
 
     function editData(rowData){
-        // console.log(rowData);
+        console.log(rowData);
         editTaskModule.style.display = "block";
 
         var txtTitle = document.getElementById("edit-txt-task-title");
@@ -500,6 +500,7 @@
 
         btnModuleEditTask.addEventListener("click", function(){
 
+            var rowId = rowData.task_id;
             var newTxtTitle = document.getElementById("edit-txt-task-title").value;
             var newTxtDesc = document.getElementById("edit-txt-task-desc").value;
             var newStatus =  document.getElementById("edit_opt_task_status").value;
@@ -508,6 +509,7 @@
             var curUser = <?php echo $id ?>;
 
             var newtaskObj = {
+                id : rowId,
                 name : newTxtTitle,
                 desc : newTxtDesc,
                 date : newDate,
@@ -551,7 +553,7 @@
 
             $.ajax({
                 type: "POST",
-                url:"../back-end/deleteUser.php",
+                url:"../back-end/deleteTask.php",
                 dataType : "json",
                 contentType: "application/json; charset=utf-8", // Specify content type
                 data: JSON.stringify({

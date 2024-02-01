@@ -8,11 +8,11 @@ $response = array();
 
 if (!empty($taskObj) && json_last_error() === JSON_ERROR_NONE) {
 
-    $stmt = $conn->prepare("UPDATE task SET `task_name` = ?, `task_desc` = ?, `task_created_date` = ?, `task_status` = ? WHERE `task_id` = ?");
+    $stmt = $conn->prepare("UPDATE task SET `task_name` = ?, `task_desc` = ?, `task_created_date` = ?, `task_status` = ? , `task_prio` = ? WHERE `task_id` = ?");
     
     // check data is there
     if($stmt){
-        $stmt->bind_param("ssss",$taskObj['name'], $taskObj['desc'], $taskObj['date'], $taskObj['status']);
+        $stmt->bind_param("sssssi",$taskObj['name'], $taskObj['desc'], $taskObj['date'], $taskObj['status'],$taskObj['priority'],$taskObj['id']);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
