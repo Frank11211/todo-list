@@ -54,7 +54,7 @@
 
         <!-- User Account -->
         <div class="user">  
-            <img src="../../../img/todoLogo.png" alt="profile picture" class="user-img">
+            <img src="../../../img/user.png" alt="profile picture" class="user-img">
             <div>
                 <p class="bold"><?php echo $name ?></p>
             </div>
@@ -74,7 +74,7 @@
             <!-- BONUS -->
             <!-- Setting -->
             <li>
-                <a href="#">
+                <a id="nav-setting">
                     <i class="fa-solid fa-gear"></i>
                     <span class="nav-item">Settings</span>
                 </a>
@@ -338,6 +338,7 @@
     // Sidebar
     var menuBtn = document.getElementById("btn");
     var sidebar = document.querySelector(".sidebar");
+    var settingBtn = document.getElementById("nav-setting");
 
     // All Button
     var btnAddTask = document.getElementById("btn-add-task");
@@ -368,31 +369,13 @@
 
     //endregion
 
-    /** ======= Information =========
-     * task_created_dte
-     * task_desc
-     * task_name
-     * task_status
-     * user_id
-     * 
-     * key = priority
-     * <span> Priority :</span>
-        <select id="add-opt-task-prio">
-            <option value="0">LOW</option>
-            <option value="1">MEDIUm</option>
-            <option value="2">HIGH</option>
-        </select>
-     */
-
-    
-    
-     // Sidebar menu action
+    // Sidebar menu action
     menuBtn.addEventListener("click" , function (){
         // add "active" CSS class to show navigation bar
         sidebar.classList.toggle("active");
     });
 
-    // Display New Task module
+    // Add Task module
     btnAddTask.addEventListener("click", function(){
 
         newTaskModule.style.display = "block";
@@ -423,7 +406,7 @@
             }
 
             $.ajax({
-                url : "../back-end/addUser.php",
+                url : "../back-end/addTask.php",
                 type: "POST",
                 dataType : "json",
                 data :JSON.stringify(taskObj), // Object is an associate array 
@@ -450,8 +433,15 @@
 
     });
 
-    // Destory session from logout.php via user id
+    // Nav Setting 
+    settingBtn.addEventListener("click", function(){
+        alert("Sorry, current feature under maintenance");
+        return;
+    })
+
+    // Nav Logout
     btnLogOut.addEventListener("click", function(){
+        // Destory session from logout.php via user id
         fetch('../back-end/logout.php', {
             method: 'POST',
             headers: {
@@ -492,6 +482,7 @@
     });
     //endregion
     
+
     function editData(rowData){
         // console.log(rowData);
         editTaskModule.style.display = "block";
@@ -527,7 +518,7 @@
 
             $.ajax({
                 type: "POST",
-                url:"../back-end/updateUser.php",
+                url:"../back-end/updateTask.php",
                 dataType : "json",
                 contentType: "application/json; charset=utf-8", // Specify content type
                 data: JSON.stringify(newtaskObj),
@@ -652,12 +643,29 @@
                 { 
                     targets: 0,
                     data : "task_id" ,
-                    orderable: false
+                    orderable: false,
+                    render: function (data, type, row){
+
+                        if(row.task_status == "COMPLETED"){
+                            return "<del>"+ data +"</del>";
+                        }
+
+                        return data;
+                    }
                 },
                 {
                     targets: 1,
                     data : "task_name",
-                    orderable: false
+                    orderable: false,
+                    render: function (data, type, row){
+
+                        if(row.task_status == "COMPLETED"){
+                            return "<del>"+ data +"</del>";
+                        }
+
+                        return data;
+
+                    }
                 },
                 {
                     targets: 2,
@@ -670,9 +678,14 @@
                     data : "task_created_date",
                     orderable: false,
                     render : function (data, type, row){
-                        
+
+                        if(row.task_status == "COMPLETED"){
+                            return "<del>"+ getDateAfterSplite(data) +"</del>";
+                        }
                         return getDateAfterSplite(data);
+                        
                     }
+
                 },
                 {
                     targets: 4,
@@ -718,11 +731,11 @@
                     }
                 },         
             ],
-            // Add Style class for Status
+            // Add Style class for Status and Priority
             rowCallback: function(row, data) {
                 // console.log(row);
 
-                // style Status
+                // Status
                 switch(data.task_status) {
 
                     case "OPEN":
@@ -762,7 +775,7 @@
                     break; 
                 } 
                 
-                // style Priority
+                // Priority
                 switch(data.task_prio) {
 
                     case "LOW":
@@ -810,7 +823,6 @@
             table.search(this.value).draw();
         });
         
-
         function getDateAfterSplite(data){
             var date = data.split(" ");
             return date[0];

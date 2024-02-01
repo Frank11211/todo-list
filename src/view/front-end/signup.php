@@ -120,7 +120,7 @@
                         if(response.success){
                             alert(response.message);
                             window.location.href = "../../../login.php";    
-                            
+
                         }else{
                             alert("Error : " + response.success);
                             alert(response.message);
@@ -139,7 +139,6 @@
         });
     
     </script>
-    
-    
+      
 </body>
 </html>
