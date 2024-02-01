@@ -69,7 +69,7 @@
                 var txtSignUpName = $("#txt-signup-username").val();
                 var txtSignUpPass = $("#txt-signup-password").val();
 
-                if (txtSignUpName === null || !/^[a-zA-Z0-9]+$/.test(txtSignUpName)) {
+                if (txtSignUpName === null || !/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/.test(txtSignUpName)) {
                     $("#error-signup-username").css("display", "block").text("Name must not be null and should not contain special characters.");
                     return;
                 }else{

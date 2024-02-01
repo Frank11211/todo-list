@@ -149,8 +149,8 @@
 .main-container {
     display: flex;
     justify-content: space-between;
-    width: 80%;
-    margin: 0 0 20px 180px;
+    width: 82%;
+    margin: 0 0 20px 150px;
 }
 
 
@@ -541,4 +541,21 @@ select {
     width: 90%;
     justify-content: center;
     align-items: center;
+}
+
+.hide {
+    display:none
+}
+
+.erro-msg-modal-style{
+    border: 2px solid #f1aeb5;;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0px;
+    color: #58151c;
+    background-color: #f8d7da;;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

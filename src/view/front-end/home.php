@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../../../css/sidebar-style.css">
+    <link rel="stylesheet" href="../../../css/home.css">
 
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -64,14 +64,13 @@
         <ul>   
             <!-- Dashbaord Only -->
             <li>
-                <a href="#">
+                <a href="../front-end/home.php">
                     <i class="fa-solid fa-square-poll-vertical"></i>
                     <span class="nav-item">Dashboard</span>
                 </a>
                 
             </li>
 
-            <!-- BONUS -->
             <!-- Setting -->
             <li>
                 <a id="nav-setting">
@@ -82,7 +81,7 @@
 
             <!-- Log Out -->
             <li>
-                <a href="#">
+                <a>
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="nav-item" id="btn-logout">Logout</span>
                     
@@ -130,7 +129,7 @@
         </div>
 
         <!-- All Modals -->
-        <!-- Create -->
+        <!-- Add -->
         <div id="add-modal" class="modal">
         
             <!-- Modal Content -->
@@ -147,6 +146,8 @@
                         <span> Title :</span><br>
                         <input type="text" id="txt-task-title">  <!-- style="width: 100%;" -->
                     </div>
+
+                    <div class="erro-msg-modal-style hide" id="add-edit-title"></div>
 
                     <!-- description -->
                     <div>
@@ -230,6 +231,8 @@
                         <span> Title :</span><br>
                         <input type="text" id="edit-txt-task-title">  <!-- style="width: 100%;" -->
                     </div>
+
+                    <div class="erro-msg-modal-style hide" id="error-edit-title"></div>
 
                     <!-- description -->
                     <div>
@@ -390,6 +393,16 @@
             var curdate = new Date(); 
             var curUser = <?php echo $id ?>
 
+            var errModal = document.getElementById("add-edit-title");
+
+            if (txtTitle === null || !/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/.test(txtTitle)) {
+                errModal.innerHTML = "Title cannot be empty and should only contain letters, numbers, or spaces.";
+                errModal.style.display = "block";
+                return;
+            } else {
+                errModal.style.display = "none";
+            }
+
             // send data in object form
             var taskObj = {
                 name : txtTitle,
@@ -484,13 +497,15 @@
     
 
     function editData(rowData){
-        console.log(rowData);
+        // console.log(rowData);
         editTaskModule.style.display = "block";
 
         var txtTitle = document.getElementById("edit-txt-task-title");
         var txtDesc = document.getElementById("edit-txt-task-desc");
         var optStatus =  document.getElementById("edit_opt_task_status");
         var optPrio =  document.getElementById("edit-opt-task-prio");
+
+        var errModal = document.getElementById("error-edit-title");
 
         txtTitle.value = rowData.task_name;
         txtDesc.value = rowData.task_desc;
@@ -507,6 +522,14 @@
             var newPrio = document.getElementById("edit-opt-task-prio").value;
             var newDate = new Date();
             var curUser = <?php echo $id ?>;
+
+            if (newTxtTitle === null || !/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/.test(newTxtTitle)) {
+                errModal.innerHTML = "Title unable to be empty";
+                errModal.style.display = "block";
+                return;
+            }else{
+                errModal.style.display = "none";
+            }
 
             var newtaskObj = {
                 id : rowId,
@@ -711,7 +734,7 @@
                     render: function (data, type, row) {
                         // Convert the row object to a JSON string using a custom function
                         var jsonString = customStringify(row);
-                        return `<button class='btn-view' onclick='viewData(${jsonString})'><i class='fa-solid fa-magnifying-glass'></i> View </button>`;
+                        return `<button class='btn-view cursor-pointer' onclick='viewData(${jsonString})'><i class='fa-solid fa-magnifying-glass'></i> View </button>`;
                     }
                 },
                 {
@@ -720,7 +743,7 @@
                     orderable: false,
                     render: function (data, type, row) {
                         var jsonString = customStringify(row);
-                        return `<button class='btn-edit' onclick='editData(${jsonString})'><i class='fa-solid fa-pen-to-square'></i> Edit </button>`;
+                        return `<button class='btn-edit cursor-pointer' onclick='editData(${jsonString})'><i class='fa-solid fa-pen-to-square'></i> Edit </button>`;
                     }
                 },
                 {
@@ -729,7 +752,7 @@
                     data: null,
                     render: function (data, type, row) {
                         var jsonString = customStringify(row);
-                        return ` <button class='btn-remove' onclick='deleteData(${jsonString})'><i class='fa-solid fa-trash'></i> Delete </button>`;
+                        return ` <button class='btn-remove cursor-pointer' onclick='deleteData(${jsonString})'><i class='fa-solid fa-trash'></i> Delete </button>`;
                     }
                 },         
             ],
