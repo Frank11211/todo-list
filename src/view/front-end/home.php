@@ -97,7 +97,7 @@
 
             <div class="main-container">
                 <div class="header-and-search-container">
-                    <h1>To Do List</h1>
+                    <h1>Dashboard</h1>
                     
                     <div class="search">
                         <input placeholder='&#x1F50E;&#xFE0E;    Search task name' id="search-name-input">
@@ -395,8 +395,8 @@
 
             var errModal = document.getElementById("add-edit-title");
 
-            if (txtTitle === null || !/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/.test(txtTitle)) {
-                errModal.innerHTML = "Title cannot be empty and should only contain letters, numbers, or spaces.";
+            if (txtTitle === null || !/^[a-zA-Z0-9][a-zA-Z0-9\s!@#$%^&*()-_+=<>?/,.:;'"`~]*$/.test(txtTitle)) {
+                errModal.innerHTML = "Title cannot be empty";
                 errModal.style.display = "block";
                 return;
             } else {
@@ -523,7 +523,8 @@
             var newDate = new Date();
             var curUser = <?php echo $id ?>;
 
-            if (newTxtTitle === null || !/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/.test(newTxtTitle)) {
+           
+            if (newTxtTitle === null || !/^[a-zA-Z0-9][a-zA-Z0-9\s!@#$%^&*()-_+=<>?/,.:;'"`~]*$/.test(newTxtTitle)) {
                 errModal.innerHTML = "Title unable to be empty";
                 errModal.style.display = "block";
                 return;

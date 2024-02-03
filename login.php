@@ -25,40 +25,78 @@
         <div class="input-icons">
             <!-- Tittle -->
             <h2  class="login_input_mdl">MyWare - TO DO LIST</h2>
+
+            <div class="alert alert-danger hide" id="error-login" role="alert"></div>
+
+            <!-- Username -->
+            <div class="login_input_mdl">
+                <i class="fa-solid fa-user icon"></i>
+                <input type="text" class="form-control input-field" placeholder="Username" aria-label="Username" id="login-username">
+            </div>
             
-            <!-- submit form to loginValidate.php -->
-            <form action="src/view/back-end/loginValidate.php" method="post">
+            <!-- Passwod  -->
+            <div  class="login_input_mdl">
+                <i class="fa-solid fa-key icon"></i>
+                <input type="password" class="form-control input-field" placeholder="Password" aria-label="Password" id="login-password">
 
-                <!-- Username -->
-                <div class="login_input_mdl">
-                    <i class="fa-solid fa-user icon"></i>
-                    <input type="text" class="form-control input-field" placeholder="Username" aria-label="Username" name="login_username">
-                </div>
-                
-                <!-- Passwod  -->
-                <div  class="login_input_mdl">
-                    <i class="fa-solid fa-key icon"></i>
-                    <input type="password" class="form-control input-field" placeholder="Password" aria-label="Username" name="login_password">
-                    <span class="recover-pass-link" id="pass-rec-link"> <a href="#">Forget Password ?</a></span> 
-                </div>
-                
-                <!-- Button Group get_space-->
-                <div class="login-footer">
-                    <button type="submit" class="btn btn-primary" name="submit">Login</button>
-                    <span> No account ? <a href="src/view/front-end/signup.php"> Sign Up Now</a></span> 
-                </div>
-
-            </form>
+                <span class="recover-pass-link" id="pass-rec-link"> <a href="#">Forget Password ?</a></span> 
+            </div>
+            
+            <!-- Button Group get_space-->
+            <div class="login-footer">
+                <button type="button" class="btn btn-primary" id="login-submit">Login</button>
+                <span> No account ? <a href="src/view/front-end/signup.php"> Sign Up Now</a></span> 
+            </div>
             
         </div>
     </div>
     
     <script type="text/javascript">
         
-        $('#pass-rec-link').on('click', function(){
-            alert("Sorry, current feature under maintenance");
-        })
+        $(document).ready(function(){
+            // Future feature
+            $('#pass-rec-link').on('click', function(){
+                alert("Sorry, current feature under maintenance");
+            });
 
+            $("#login-submit").on("click", function(){
+                
+                //Input
+                var loginUsername = $('#login-username').val();
+                var loginPassword = $('#login-password').val();
+ 
+                //Error Modal 
+                var errModal = $("#error-login")
+
+                var userObj = {
+                    username : loginUsername,
+                    password : loginPassword
+                }
+
+                $.ajax({
+                    url : "src/view/back-end/loginValidate.php",
+                    type : "POST",
+                    dataType : "json",
+                    data :JSON.stringify(userObj), // Object is an associate array 
+                    contentType: "application/json; charset=utf-8", // Specify content type
+                    success: function(response){
+                        if(response.success){
+                            // direct it to homepage.
+                            window.location.replace("src/view/front-end/home.php");
+
+                        }else{
+                            errModal.removeClass("hide").text(response.message );
+                        }
+                    },
+                    error : function(xhr, jsonOption, thrownError){
+                        alert("Error: " + xhr );
+                        console.log(thrownError);
+                    }
+                })
+           
+            });
+            
+        })
         
     </script>
 </body>

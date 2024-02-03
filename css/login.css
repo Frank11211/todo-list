@@ -40,6 +40,10 @@ body{
     padding: 10px;
     min-width: 40px;
 }
+
+.hide {
+    display:none
+}
  
 .input-field {
     width: 0%;
