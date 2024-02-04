@@ -36,8 +36,6 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
 
-
-
 </head>
 <body>
     
@@ -454,23 +452,19 @@
 
     // Nav Logout
     btnLogOut.addEventListener("click", function(){
-        // Destory session from logout.php via user id
-        fetch('../back-end/logout.php', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        })
-        .then(response => {
-            if(response.ok){
+        
+        $.ajax({
+            url : "../back-end/logout.php",
+            type : "POST",
+            contentType: "application/json",
+            success : function(response){
                 window.location = "../../../login.php";
-            }else{
-                console.error('Error:', response.status);
+            },
+            error: function(xhr, jasonOption, thrownError){
+                console.log("Error: " + thrownError);
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
         });
+        
     });
 
     //region Close Action Btn
